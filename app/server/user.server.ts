@@ -1,22 +1,22 @@
-import type { Prisma } from '@prisma/client'
+import type { Prisma } from "@prisma/client";
 
-import { prisma } from './prisma.server'
-import { createPasswordHash } from './auth-service.server'
+import { prisma } from "./prisma.server";
+import { createPasswordHash } from "./auth-service.server";
 
 export const createUser = async (
   input: Prisma.UserCreateInput & {
-    password?: string,
-    avatarUrl?: string,
-    account?: Omit<Prisma.AccountCreateInput, 'user'>
+    password?: string;
+    avatarUrl?: string;
+    account?: Omit<Prisma.AccountCreateInput, "user">;
   }
 ) => {
   const data: Prisma.UserCreateInput = {
     email: input.email,
-    username: input.username
-  }
+    username: input.username,
+  };
 
   if (input.password) {
-    data.password = await createPasswordHash(input.password)
+    data.password = await createPasswordHash(input.password);
   }
 
   if (input.account) {
@@ -26,10 +26,10 @@ export const createUser = async (
           provider: input.account.provider,
           providerAccountId: input.account.providerAccountId,
           accessToken: input.account.accessToken,
-          refreshToken: input.account.refreshToken
-        }
-      ]
-    }
+          refreshToken: input.account.refreshToken,
+        },
+      ],
+    };
   }
 
   const user = await prisma.user.create({
@@ -41,12 +41,11 @@ export const createUser = async (
       username: true,
       avatarUrl: true,
       account: true,
+    },
+  });
 
-    }
-  })
-
-  return user
-}
+  return user;
+};
 
 export const getUser = async (input: Prisma.UserWhereUniqueInput) => {
   const user = await prisma.user.findUnique({
@@ -58,23 +57,22 @@ export const getUser = async (input: Prisma.UserWhereUniqueInput) => {
       username: true,
       avatarUrl: true,
       account: true,
-
-    }
-  })
-  return user
-}
+    },
+  });
+  return user;
+};
 
 export const getUserPasswordHash = async (
   input: Prisma.UserWhereUniqueInput
 ) => {
   const user = await prisma.user.findUnique({
-    where: input
-  })
+    where: input,
+  });
   if (user) {
     return {
       user: { ...user, password: null },
-      passwordHash: user.password
-    }
+      passwordHash: user.password,
+    };
   }
-  return { user: null, passwordHash: null }
-}
+  return { user: null, passwordHash: null };
+};

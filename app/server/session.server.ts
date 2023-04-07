@@ -1,19 +1,19 @@
 // app/session.server.ts
-import { Session, createCookieSessionStorage } from '@remix-run/node'
+import { Session, createCookieSessionStorage } from "@remix-run/node";
 
 export type ToastMessage = {
-  message: string
-  type: 'success' | 'error'
-}
+  message: string;
+  type: "success" | "error";
+};
 export const sessionStorage = createCookieSessionStorage({
   cookie: {
-    name: '_session',
-    sameSite: 'lax',
-    path: '/',
+    name: "_session",
+    sameSite: "lax",
+    path: "/",
     httpOnly: true,
-    secrets: ['s3cr3t'],
-    secure: process.env.NODE_ENV === 'production'
-  }
-})
+    secrets: ["s3cr3t"],
+    secure: process.env.NODE_ENV === "production",
+  },
+});
 
-export const { getSession, commitSession, destroySession } = sessionStorage
+export const { getSession, commitSession, destroySession } = sessionStorage;
