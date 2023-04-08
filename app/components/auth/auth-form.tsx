@@ -40,14 +40,14 @@ export const AuthForm = ({ authType }: Props) => {
           type="email"
           placeholder="youremail@mail.com"
         />
-        <label>Username</label>
+        {/* <label>Username</label>
         <input
           className="rounded-xl p-2 text-black shadow-md"
           id="username"
           name="username"
           type="text"
           placeholder="username"
-        />
+        /> */}
       </>
 
       <>

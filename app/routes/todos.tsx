@@ -71,41 +71,36 @@ export default function TodosHome() {
   }
 
   return (
-    <div className="grid-rows-auto flex grid-cols-12 flex-col gap-3 md:grid">
-      <div className="col-span-10 col-start-2 row-span-1 mx-auto flex flex-col items-center">
+    <div className="grid-rows-auto flex grid-cols-12 flex-col gap-3 md:grid p-1">
+      <div className="col-span-4 col-start-5 flex flex-col items-center p-1">
         <h1 className="items-center text-2xl">ToDo</h1>
         <Outlet />
-      </div>
-
-      <div className="col-span-4 col-start-2 row-span-1 row-start-2">
-        <div className="flex flex-col items-center gap-4">
-          <Counter data={data.todos} />
+        <div className="flex fle items-center gap-4 p-1">
+          <Counter data={ data.todos } />
 
           <Link
             to="/todos/new"
-            className="rounded-md border-2 border-green-500 px-3 py-2 text-black hover:bg-green-700  hover:text-white"
+            className="rounded-md border-2 border-green-500 px-3 py-2 text-green-500 hover:bg-green-700  hover:text-white"
           >
-            New Todo
+            New
           </Link>
           <SearchBar />
         </div>
-      </div>
-      <div className="col-span-4 col-start-7 row-span-1 row-start-2">
-        <div className="flex flex-col gap-2">
-          <ul className="">
+        <div className="flex flex-col items-center gap-2">
+          <ul className="w-screen">
             {data.todos.map((todo) => (
               <li
                 className={
                   todo.completed === true
-                    ? "mt-4 flex items-center justify-between gap-2 overflow-hidden rounded-md border p-1 line-through shadow-md"
-                    : "mt-4 flex items-center justify-between gap-2 overflow-hidden rounded-md border p-1 shadow-md"
+                    ? "mt-4  flex items-center justify-between gap-2 overflow-hidden rounded-md border p-2 line-through shadow-md"
+                    : "mt-4  flex items-center justify-between gap-2 overflow-hidden rounded-md border p-2 shadow-md"
                 }
                 key={todo.id}
               >
-                <div className="flex flex-col gap-2">
-                  <h3 className="">{todo.title}</h3>
-                </div>
-                <div></div>
+
+                  <h3 className="flex-wrap">{todo.title}</h3>
+
+
 
                 <div className="flex flex-row gap-2">
                   <completedFetcher.Form
@@ -116,7 +111,7 @@ export default function TodosHome() {
                   >
                     <div className="flex">
                       <Checkbox.Root
-                        className="tracking-wsder  flex h-6 w-6 items-center justify-center  border-2"
+                        className="border-white dark:border-green-500  flex h-6 w-6 items-center justify-center  border-2"
                         id="c1"
                         name="completed"
                         defaultChecked={
@@ -158,7 +153,7 @@ export default function TodosHome() {
 
 function Counter({ data: todos }: { data: SerializeFrom<Partial<Todo>>[] }) {
   return (
-    <div className="flex flex-row items-center gap-4">
+    <div className="flex flex-row items-center gap-4 p-1">
       <div className="flex flex-col items-center gap-1">
         <p className="text-lg">Completed</p>
         {todos.filter((todo) => todo.completed).length} / {todos.length}

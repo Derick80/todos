@@ -10,10 +10,15 @@ export async function loader({ request, params }: LoaderArgs) {
   if (!user) {
     return redirect("/login");
   }
+  const { id } = params;
+  if(!id) {
+    throw new Error("Id is required");
+  }
+
 
   const todo = await prisma.todo.findUnique({
     where: {
-      id: params.id,
+      id,
     },
   });
   if (!todo) {
@@ -38,6 +43,11 @@ export async function action({ request, params }: ActionArgs) {
     throw new Error("You must be logged in to create a todo");
   }
 
+  const { id } = params;
+  if(!id) {
+    throw new Error("Id is required");
+  }
+
   const { formData, errors } = await validateAction({ request, schema });
 
   if (errors) {
@@ -47,7 +57,7 @@ export async function action({ request, params }: ActionArgs) {
   const { title, description, completed } = formData as ActionInput;
   await prisma.todo.update({
     where: {
-      id: params.id,
+      id,
     },
     data: {
       title,

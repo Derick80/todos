@@ -18,6 +18,18 @@ flyctl auth signup
 flyctl launch
 ```
 
+4. To set up prisma I have to ssh into my instance and manually push the scema.  I also had to change directories from base to /app to be in the correct place.
+
+notes about deployment: Remember to modify callback_urls to production call backs.
+
+fly deploy
+fly ssh console -s
+--pick instance.  For some reason only the 2nd one worked
+then
+cd app
+npx prisma db push
+
+
 ## Development
 
 From your terminal:

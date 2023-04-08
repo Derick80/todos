@@ -1,7 +1,5 @@
 import {
-  DiscIcon,
   DiscordLogoIcon,
-  GitHubLogoIcon,
 } from "@radix-ui/react-icons";
 import type { ActionFunction, LoaderArgs } from "@remix-run/node";
 import { redirect } from "@remix-run/node";
@@ -11,22 +9,6 @@ import { AuthForm } from "~/components/auth/auth-form";
 import { SocialLoginForm } from "~/components/auth/social-login-form";
 import { isAuthenticated, authenticator } from "~/server/auth.server";
 
-type ActionData = {
-  formError?: string;
-  fieldErrors?: {
-    email: string | undefined;
-    password: string | undefined;
-    firstName?: string | undefined;
-    lastName?: string | undefined;
-  };
-  fields?: {
-    action: string;
-    email: string;
-    password: string;
-    firstName?: string;
-    lastName?: string;
-  };
-};
 
 export async function loader(args: LoaderArgs) {
   return (await isAuthenticated(args.request)) ? redirect("/") : null;

@@ -6,13 +6,14 @@ import { createPasswordHash } from "./auth-service.server";
 export const createUser = async (
   input: Prisma.UserCreateInput & {
     password?: string;
-    avatarUrl?: string;
     account?: Omit<Prisma.AccountCreateInput, "user">;
   }
 ) => {
   const data: Prisma.UserCreateInput = {
     email: input.email,
     username: input.username,
+
+
   };
 
   if (input.password) {
@@ -34,14 +35,7 @@ export const createUser = async (
 
   const user = await prisma.user.create({
     data,
-    select: {
-      password: false,
-      id: true,
-      email: true,
-      username: true,
-      avatarUrl: true,
-      account: true,
-    },
+
   });
 
   return user;
