@@ -1,18 +1,14 @@
 // app/components/search-bar.tsx
 
 import {
-  useFetcher,
   useNavigate,
-  useNavigation,
   useSearchParams,
   useSubmit,
 } from "@remix-run/react";
-import React from "react";
 
 export function SearchBar() {
   const navigate = useNavigate();
-  const transition = useNavigation();
-  const formRef = React.useRef<HTMLFormElement>(null);
+
   let [searchParams] = useSearchParams();
 
   const clearFilters = () => {
@@ -20,11 +16,10 @@ export function SearchBar() {
 
     navigate("/todos");
   };
-  const filterFetcher = useFetcher();
 
   const submit = useSubmit();
 
-  const handleCompletedChange = (e) => {
+  const handleCompletedChange = (e: { currentTarget: { form: URLSearchParams | HTMLInputElement | HTMLFormElement | HTMLButtonElement | FormData | { [name: string]: string } | null } }) => {
     submit(e.currentTarget.form);
     navigate("/todos");
   };

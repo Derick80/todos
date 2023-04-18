@@ -5,7 +5,6 @@ import { json, redirect } from "@remix-run/node";
 import {
   Link,
   Outlet,
-  useActionData,
   useFetcher,
   useLoaderData,
   useSubmit,
@@ -15,6 +14,14 @@ import { isAuthenticated } from "~/server/auth.server";
 import { prisma } from "~/server/prisma.server";
 import { SearchBar } from "~/components/search-bar";
 
+
+export function meta(){
+  return [
+    {title: 'Todos'},
+    {name: 'description', content: 'Todos'},
+
+  ]
+}
 export async function loader({ request }: LoaderArgs) {
   const user = await isAuthenticated(request);
   if (!user) {
@@ -60,7 +67,6 @@ export async function action({ request, params }: ActionArgs) {
 export default function TodosHome() {
   const [done, setDone] = React.useState(false);
   const data = useLoaderData<typeof loader>();
-  const actionData = useActionData();
   const deleteFetcher = useFetcher();
   const completedSubmit = useSubmit();
   const completedFetcher = useFetcher();
@@ -73,7 +79,7 @@ export default function TodosHome() {
   return (
     <div className="grid-rows-auto flex grid-cols-12 flex-col gap-3 md:grid p-1">
       <div className="col-span-4 col-start-5 flex flex-col items-center p-1">
-        <h1 className="items-center text-2xl">ToDo</h1>
+        <h1 className="items-center text-3xl font-semibold">ToDos</h1>
         <Outlet />
         <div className="flex fle items-center gap-4 p-1">
           <Counter data={ data.todos } />
@@ -98,7 +104,7 @@ export default function TodosHome() {
                 key={todo.id}
               >
 
-                  <h3 className="flex-wrap">{todo.title}</h3>
+                  <h3 className="w-3/4 overflow-auto">{todo.title}</h3>
 
 
 
@@ -111,7 +117,7 @@ export default function TodosHome() {
                   >
                     <div className="flex">
                       <Checkbox.Root
-                        className="border-white dark:border-green-500  flex h-6 w-6 items-center justify-center  border-2"
+                        className="border-black dark:border-green-500  flex h-6 w-6 items-center justify-center  border-2"
                         id="c1"
                         name="completed"
                         defaultChecked={
@@ -119,10 +125,10 @@ export default function TodosHome() {
                         }
                         onClick={() => setDone(!done)}
                       >
-                        <Checkbox.Indicator className="w-full">
+                        <Checkbox.Indicator className="w-full bg-black">
                           {todo.completed || completedFetcher?.data?.completed
                             ? "✅"
-                            : null}
+                            : ""}
                         </Checkbox.Indicator>
                       </Checkbox.Root>
                     </div>
