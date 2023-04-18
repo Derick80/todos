@@ -6,7 +6,8 @@
     "deploy": "fly deploy --remote-only",
     "dev": "remix dev",
     "start": "remix-serve build",
-    "typecheck": "tsc"
+    "typecheck": "tsc",
+    "format": "prettier \"app/**/*.ts\" \"app/**/*.tsx\" --write . "
   },
   "dependencies": {
     "@prisma/client": "^4.12.0",

@@ -1,10 +1,6 @@
 // app/components/search-bar.tsx
 
-import {
-  useNavigate,
-  useSearchParams,
-  useSubmit,
-} from "@remix-run/react";
+import { useNavigate, useSearchParams, useSubmit } from "@remix-run/react";
 
 export function SearchBar() {
   const navigate = useNavigate();
@@ -19,7 +15,18 @@ export function SearchBar() {
 
   const submit = useSubmit();
 
-  const handleCompletedChange = (e: { currentTarget: { form: URLSearchParams | HTMLInputElement | HTMLFormElement | HTMLButtonElement | FormData | { [name: string]: string } | null } }) => {
+  const handleCompletedChange = (e: {
+    currentTarget: {
+      form:
+        | URLSearchParams
+        | HTMLInputElement
+        | HTMLFormElement
+        | HTMLButtonElement
+        | FormData
+        | { [name: string]: string }
+        | null;
+    };
+  }) => {
     submit(e.currentTarget.form);
     navigate("/todos");
   };

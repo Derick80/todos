@@ -11,7 +11,7 @@ import {
 } from "@remix-run/react";
 import stylesheet from "~/tailwind.css";
 import { isAuthenticated } from "./server/auth.server";
-import Layout from './components/layout'
+import Layout from "./components/layout";
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: stylesheet },
@@ -33,17 +33,13 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body
-        className='text-black dark:text-white bg-white dark:bg-slate-900  '
-      >
+      <body className="bg-white text-black dark:bg-slate-900 dark:text-white  ">
         <Layout>
           <Outlet />
           <ScrollRestoration />
           <Scripts />
           <LiveReload />
-
         </Layout>
-
       </body>
     </html>
   );

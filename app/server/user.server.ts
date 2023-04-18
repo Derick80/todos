@@ -12,8 +12,6 @@ export const createUser = async (
   const data: Prisma.UserCreateInput = {
     email: input.email,
     username: input.username,
-
-
   };
 
   if (input.password) {
@@ -35,7 +33,6 @@ export const createUser = async (
 
   const user = await prisma.user.create({
     data,
-
   });
 
   return user;

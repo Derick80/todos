@@ -14,13 +14,8 @@ import { isAuthenticated } from "~/server/auth.server";
 import { prisma } from "~/server/prisma.server";
 import { SearchBar } from "~/components/search-bar";
 
-
-export function meta(){
-  return [
-    {title: 'Todos'},
-    {name: 'description', content: 'Todos'},
-
-  ]
+export function meta() {
+  return [{ title: "Todos" }, { name: "description", content: "Todos" }];
 }
 export async function loader({ request }: LoaderArgs) {
   const user = await isAuthenticated(request);
@@ -77,12 +72,12 @@ export default function TodosHome() {
   }
 
   return (
-    <div className="grid-rows-auto flex grid-cols-12 flex-col gap-3 md:grid p-1">
+    <div className="grid-rows-auto flex grid-cols-12 flex-col gap-3 p-1 md:grid">
       <div className="col-span-4 col-start-5 flex flex-col items-center p-1">
         <h1 className="items-center text-3xl font-semibold">ToDos</h1>
         <Outlet />
-        <div className="flex fle items-center gap-4 p-1">
-          <Counter data={ data.todos } />
+        <div className="fle flex items-center gap-4 p-1">
+          <Counter data={data.todos} />
 
           <Link
             to="/todos/new"
@@ -103,10 +98,7 @@ export default function TodosHome() {
                 }
                 key={todo.id}
               >
-
-                  <h3 className="w-3/4 overflow-auto">{todo.title}</h3>
-
-
+                <h3 className="w-3/4 overflow-auto">{todo.title}</h3>
 
                 <div className="flex flex-row gap-2">
                   <completedFetcher.Form
@@ -117,7 +109,7 @@ export default function TodosHome() {
                   >
                     <div className="flex">
                       <Checkbox.Root
-                        className="border-black dark:border-green-500  flex h-6 w-6 items-center justify-center  border-2"
+                        className="flex h-6  w-6 items-center justify-center border-2 border-black  dark:border-green-500"
                         id="c1"
                         name="completed"
                         defaultChecked={

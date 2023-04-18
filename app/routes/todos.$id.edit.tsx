@@ -11,10 +11,9 @@ export async function loader({ request, params }: LoaderArgs) {
     return redirect("/login");
   }
   const { id } = params;
-  if(!id) {
+  if (!id) {
     throw new Error("Id is required");
   }
-
 
   const todo = await prisma.todo.findUnique({
     where: {
@@ -44,7 +43,7 @@ export async function action({ request, params }: ActionArgs) {
   }
 
   const { id } = params;
-  if(!id) {
+  if (!id) {
     throw new Error("Id is required");
   }
 
